@@ -1,6 +1,10 @@
 # Echo server
 
 import socket
+from dotenv import dotenv_values
+
+# Load env
+config = dotenv_values(".env")
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,7 +26,7 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            data = connection.recv(16)
+            data = connection.recv(2048)
             print('received {!r}'.format(data))
             if data:
                 print('sending data back to the client')

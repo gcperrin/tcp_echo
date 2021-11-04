@@ -1,8 +1,11 @@
 # Client
 
 import socket
-import sys
 import json
+from dotenv import dotenv_values
+
+# Load env
+config = dotenv_values(".env")
 
 fd = open('./data.json')
 data = json.load(fd)
@@ -27,7 +30,7 @@ try:
     amount_expected = len(message)
 
     while amount_received < amount_expected:
-        data = sock.recv(16)
+        data = sock.recv(2048)
         amount_received += len(data)
         print('received {!r}'.format(data))
 
